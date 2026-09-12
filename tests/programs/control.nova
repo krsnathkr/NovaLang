@@ -1,0 +1,11 @@
+if (x >= 10 && x <= 20) {
+    print(true);
+} else {
+    print(false);
+}
+while (x < 10 && x != 5) {
+    x = x + 1;
+}
+if (x == 10 || x > 20) {
+    print(!false);
+}
