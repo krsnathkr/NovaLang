@@ -27,4 +27,6 @@ programs and parser test cases.
 
 ChatGPT (OpenAI) assisted with learning parser and AST concepts, parser architecture, operator precedence, troubleshooting, test-case design, and documentation. The project team reports reviewing the lexer, parser, AST, tests, grammar, and documentation, and evaluating AI suggestions against the existing NovaLang grammar and project requirements.
 
-One verified correction was aligning identifier and number handling with the language grammar rather than relying on broader character classes. The team reports testing the Part 3 work with NovaLang programs and parser cases. Group members should review and rerun the checks before submission.
+One parser design suggestion the team verified was to parse multiplication, division, and modulo at a tighter precedence level than addition and subtraction. The Part 3 grammar and the saved AST for `2 + 3 * 4` demonstrate that behavior.
+
+The team reports testing the Part 3 work with NovaLang programs and parser cases. Group members should review and rerun the checks before submission.
