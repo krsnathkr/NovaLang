@@ -1,0 +1,6 @@
+ProgramNode
+  AssignmentNode(Declaration)
+    VariableNode(x)
+    NumberNode(10)
+  PrintNode
+    VariableNode(x)

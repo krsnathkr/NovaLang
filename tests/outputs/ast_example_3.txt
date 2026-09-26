@@ -1,0 +1,13 @@
+ProgramNode
+  AssignmentNode(Declaration)
+    VariableNode(x)
+    NumberNode(10)
+  AssignmentNode(Assignment)
+    VariableNode(x)
+    BinaryOpNode(*)
+      BinaryOpNode(+)
+        VariableNode(x)
+        NumberNode(5)
+      NumberNode(2)
+  PrintNode
+    VariableNode(x)

@@ -1,0 +1,43 @@
+<program> ::= { <statement> } ;
+
+<statement> ::=
+      <variable-declaration>
+    | <assignment>
+    | <print-statement>
+    ;
+
+<variable-declaration> ::=
+    "let" <identifier> "=" <expression> ";" ;
+
+<assignment> ::=
+    <identifier> "=" <expression> ";" ;
+
+<print-statement> ::=
+    "print" "(" <expression> ")" ";" ;
+
+<expression> ::=
+    <term> { ("+" | "-") <term> } ;
+
+<term> ::=
+    <unary> { ("*" | "/" | "%") <unary> } ;
+
+<unary> ::=
+      "-" <unary>
+    | <primary>
+    ;
+
+<primary> ::=
+      <number>
+    | <identifier>
+    | "(" <expression> ")" ;
+
+<identifier> ::= letter { letter | digit | "_" } ;
+
+<number> ::= digit { digit } [ "." digit { digit } ] ;
+
+<letter> ::= "A" | "B" | ... | "Z"
+           | "a" | "b" | ... | "z"
+           | "_" ;
+
+<digit> ::= "0" | "1" | "2" | "3" | "4"
+          | "5" | "6" | "7" | "8" | "9" ;

@@ -1,37 +1,30 @@
-### AI USE STATEMENT
+# AI Use Statement
 
-**AI Tool(s) Used:** OpenAI Codex.
+ChatGPT (OpenAI) was used as an AI-assisted development and learning
+tool during the development of NovaLang Part 3.
 
----
+ChatGPT was used for:
 
-**How did your group use AI for this project milestone?**
+- Understanding parser and Abstract Syntax Tree (AST) concepts.
+- Discussing parser architecture and implementation approaches.
+- Understanding and implementing operator precedence.
+- Troubleshooting programming errors and implementation issues.
+- Designing parser test cases and syntax-error test cases.
+- Reviewing and improving code structure and documentation.
+- Understanding the requirements and organization of the Part 3 deliverables.
 
-Codex helped draft the Part 2 lexer, examples, tests, and run instructions from our Part 1 NovaLang design.
+The NovaLang lexer, parser, AST implementation, tests, grammar, and
+documentation were reviewed and tested by the project team.
 
----
+AI-generated suggestions were evaluated and adapted to the existing
+NovaLang lexer, project requirements, grammar, and AST design rather
+than being accepted without verification.
 
-**Which project components received AI assistance?**
+All implemented functionality was tested locally using NovaLang
+programs and parser test cases.
 
-`lexer.py`, the six test programs and outputs, `tests/test_lexer.py`, and `README.md`.
+### Part 3 AI Use Statement
 
----
+ChatGPT (OpenAI) assisted with learning parser and AST concepts, parser architecture, operator precedence, troubleshooting, test-case design, and documentation. The project team reports reviewing the lexer, parser, AST, tests, grammar, and documentation, and evaluating AI suggestions against the existing NovaLang grammar and project requirements.
 
-**Describe at least one AI-generated suggestion, explanation, or code segment that your group modified, corrected, rejected, or improved.**
-
-Codex considered broad `\w` and `\d` regex classes, then corrected that approach after checking our Part 1 grammar's ASCII limits. The lexer now uses explicit ASCII ranges, and a test confirms that `é` is rejected. Our group should review this decision before submission.
-
----
-
-**How did your group test or independently verify AI-assisted work?**
-
-The Part 1 EBNF was the reference. Codex ran six automated tests, compared every saved output with the CLI result, and checked the invalid-input exit status. Group members should rerun and review these checks before submission.
-
----
-
-**What did your group learn from using AI during this milestone?**
-
-A convenient regex can silently change the language; generated code must be checked against our own grammar.
-
----
-
-**The purpose of this statement is to document how AI contributed to your development process and how your group evaluated its output.**
+One verified correction was aligning identifier and number handling with the language grammar rather than relying on broader character classes. The team reports testing the Part 3 work with NovaLang programs and parser cases. Group members should review and rerun the checks before submission.
