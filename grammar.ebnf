@@ -4,32 +4,48 @@
       <variable-declaration>
     | <assignment>
     | <print-statement>
+    | <if-statement>
+    | <while-statement>
     ;
 
-<variable-declaration> ::=
-    "let" <identifier> "=" <expression> ";" ;
+<variable-declaration> ::= "let" <identifier> "=" <expression> ";" ;
 
-<assignment> ::=
-    <identifier> "=" <expression> ";" ;
+<assignment> ::= <identifier> "=" <expression> ";" ;
 
-<print-statement> ::=
-    "print" "(" <expression> ")" ";" ;
+<print-statement> ::= "print" "(" <expression> ")" ";" ;
 
-<expression> ::=
-    <term> { ("+" | "-") <term> } ;
+<if-statement> ::=
+    "if" "(" <expression> ")" <block>
+    [ "else" <block> ] ;
 
-<term> ::=
-    <unary> { ("*" | "/" | "%") <unary> } ;
+<while-statement> ::=
+    "while" "(" <expression> ")" <block> ;
 
-<unary> ::=
-      "-" <unary>
-    | <primary>
-    ;
+<block> ::= "{" { <statement> } "}" ;
+
+<expression> ::= <logical-or> ;
+
+<logical-or> ::= <logical-and> { "||" <logical-and> } ;
+
+<logical-and> ::= <equality> { "&&" <equality> } ;
+
+<equality> ::= <comparison> { ("==" | "!=") <comparison> } ;
+
+<comparison> ::= <term> { ("<" | ">" | "<=" | ">=") <term> } ;
+
+<term> ::= <factor> { ("+" | "-") <factor> } ;
+
+<factor> ::= <unary> { ("*" | "/" | "%") <unary> } ;
+
+<unary> ::= ("!" | "-") <unary> | <primary> ;
 
 <primary> ::=
       <number>
+    | <boolean>
     | <identifier>
     | "(" <expression> ")" ;
+
+<boolean> ::= "true" | "false" ;
 
 <identifier> ::= letter { letter | digit | "_" } ;
 

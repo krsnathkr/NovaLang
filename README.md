@@ -1,33 +1,53 @@
 # NovaLang
 
-NovaLang is the group's cumulative CS 609 programming language project. Work progresses through the six assignment parts in one implementation.
+NovaLang is our group programming language project for CS 609. We have been developing this project step by step throughout the semester. In the previous parts, we worked on the language design, lexer, parser, and AST. In Part 4, we added an interpreter so that programs written in NovaLang can actually be executed.
 
-## Project progress
+## Project Progress
 
-- **Part 1:** Language design and EBNF grammar in [NovaLang - Final Project - Part 1 Language Design & Grammer.md](<NovaLang - Final Project - Part 1 Language Design & Grammer.md>).
-- **Part 2:** Lexer in `lexer.py`, with token examples and lexer checks under `tests/`.
-- **Part 3:** Recursive-descent parser and AST in `parser.py` and `ast_nodes.py`.
+- Part 1: Language design and grammar
+- Part 2: Lexer
+- Part 3: Parser and AST
+- Part 4: Interpreter and environment/symbol table
 
-The current parser covers numbers, variables, declarations, assignments, print statements, arithmetic, unary minus, parentheses, and operator precedence. Comparisons, control structures, functions, and the selected extension are reserved for later parts.
+## Part 4
 
-## Run the Part 3 parser examples
+For Part 4, we added the interpreter and environment to our previous project. The interpreter reads the AST created by the parser and executes the program.
 
-From the repository root:
+The following features are supported:
 
-```bash
-python3 tests/test_parser.py
-python3 tests/test_errors.py
-python3 generate_ast_outputs.py
-```
+- Variable declaration
+- Variable assignment
+- Addition, subtraction, multiplication, and division
+- Modulo operation
+- Operator precedence
+- Parentheses
+- Comparison operators
+- Boolean values
+- Logical operators
+- If/else statements
+- While loops
+- Print statements
+- Runtime error handling
 
-The parser examples are in `tests/programs/ast_example_*.nova`; their saved ASTs are in `tests/outputs/ast_example_*.txt`. The Part 2 lexer checks remain in `tests/test_lexer.py`.
+The comparison operators supported are:
 
-## Part 2 contribution statement
+`==`, `!=`, `<`, `>`, `<=`, `>=`
 
-The group reports equal contributions to Part 2, rounded to 33% each:
+The logical operators supported are:
 
-- Krishna Thakar — 33%
-- Sarada Garlapati — 33%
-- Rabin KC — 33%
+`&&`, `||`, `!`
 
-These percentages are the group's statement, not a claim that each member already has a GitHub commit in this repository.
+Functions were included in our original language design, but functions are not required or implemented for Part 4.
+
+## Project Files
+
+The main files used in the project are:
+
+lexer.py
+parser.py
+ast_nodes.py
+environment.py
+interpreter.py
+grammar.ebnf
+README.md
+AI_USE_STATEMENT.md

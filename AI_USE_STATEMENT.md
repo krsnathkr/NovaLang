@@ -1,32 +1,41 @@
 # AI Use Statement
 
-ChatGPT (OpenAI) was used as an AI-assisted development and learning
-tool during the development of NovaLang Part 3.
+## Part 4 AI Assistance
 
-ChatGPT was used for:
+ChatGPT was used to help us during the development and testing of NovaLang Part 4.
 
-- Understanding parser and Abstract Syntax Tree (AST) concepts.
-- Discussing parser architecture and implementation approaches.
-- Understanding and implementing operator precedence.
-- Troubleshooting programming errors and implementation issues.
-- Designing parser test cases and syntax-error test cases.
-- Reviewing and improving code structure and documentation.
-- Understanding the requirements and organization of the Part 3 deliverables.
+We used AI assistance for the following tasks:
 
-The NovaLang lexer, parser, AST implementation, tests, grammar, and
-documentation were reviewed and tested by the project team.
+- Reviewing the code from Parts 1–3 before working on Part 4.
+- Understanding how the interpreter works with the AST.
+- Understanding how an environment or symbol table can store and retrieve variables.
+- Adding support for `if/else` and `while` statements.
+- Adding comparison operations.
+- Adding runtime error handling.
+- Creating and reviewing test programs.
+- Checking the grammar and README documentation.
+- Helping identify problems during testing.
 
-AI-generated suggestions were evaluated and adapted to the existing
-NovaLang lexer, project requirements, grammar, and AST design rather
-than being accepted without verification.
+We reviewed and tested the code instead of only relying on the generated suggestions.
 
-All implemented functionality was tested locally using NovaLang
-programs and parser test cases.
+## AI-Generated Suggestion That We Checked
 
-### Part 3 AI Use Statement
+One suggestion from ChatGPT was to use an `Environment` with a parent environment instead of using only one global dictionary for all variables.
 
-ChatGPT (OpenAI) assisted with learning parser and AST concepts, parser architecture, operator precedence, troubleshooting, test-case design, and documentation. The project team reports reviewing the lexer, parser, AST, tests, grammar, and documentation, and evaluating AI suggestions against the existing NovaLang grammar and project requirements.
+The purpose of this approach was to allow blocks to have their own environment while still being able to access variables that were declared outside the block.
 
-One parser design suggestion the team verified was to parse multiplication, division, and modulo at a tighter precedence level than addition and subtraction. The Part 3 grammar and the saved AST for `2 + 3 * 4` demonstrate that behavior.
+The implementation works in the following way:
 
-The team reports testing the Part 3 work with NovaLang programs and parser cases. Group members should review and rerun the checks before submission.
+1. A block can create a child environment.
+2. Variable lookup first checks the current environment.
+3. If the variable is not found, it checks the parent environment.
+4. Assignment updates an existing variable in the environment where it was originally found.
+
+We checked this behavior using the while-loop program:
+
+let x = 1;
+
+while (x <= 5) {
+    print(x);
+    x = x + 1;
+}
