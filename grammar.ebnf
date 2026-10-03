@@ -6,6 +6,9 @@
     | <print-statement>
     | <if-statement>
     | <while-statement>
+    | <function-definition>
+    | <return-statement>
+    | <function-call-statement>
     ;
 
 <variable-declaration> ::= "let" <identifier> "=" <expression> ";" ;
@@ -20,6 +23,24 @@
 
 <while-statement> ::=
     "while" "(" <expression> ")" <block> ;
+
+<function-definition> ::=
+    "function" <identifier> "(" [ <parameter-list> ] ")" <block> ;
+
+<parameter-list> ::=
+    <identifier> { "," <identifier> } ;
+
+<return-statement> ::=
+    "return" <expression> ";" ;
+
+<function-call-statement> ::=
+    <function-call> ";" ;
+
+<function-call> ::=
+    <identifier> "(" [ <argument-list> ] ")" ;
+
+<argument-list> ::=
+    <expression> { "," <expression> } ;
 
 <block> ::= "{" { <statement> } "}" ;
 
@@ -42,6 +63,7 @@
 <primary> ::=
       <number>
     | <boolean>
+    | <function-call>
     | <identifier>
     | "(" <expression> ")" ;
 

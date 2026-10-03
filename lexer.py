@@ -15,6 +15,7 @@ KEYWORDS = {
     "fn": "FN",
     "return": "RETURN",
     "true": "TRUE",
+    "function": "FUNCTION",
     "false": "FALSE",
 }
 

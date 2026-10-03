@@ -145,3 +145,48 @@ class WhileNode(ASTNode):
             self.body.pretty(indent + 4),
         ]
         return "\n".join(lines)
+
+
+# Part 5 AST nodes
+
+@dataclass
+class FunctionDefNode(ASTNode):
+    name: str
+    parameters: List[str]
+    body: BlockNode
+
+    def pretty(self, indent=0):
+        lines = [
+            " " * indent + f"FunctionDefNode({self.name})",
+            " " * (indent + 2) + "Parameters: " + ", ".join(self.parameters),
+            " " * (indent + 2) + "Body",
+            self.body.pretty(indent + 4),
+        ]
+        return "\n".join(lines)
+
+
+@dataclass
+class FunctionCallNode(ASTNode):
+    name: str
+    arguments: List[ASTNode]
+
+    def pretty(self, indent=0):
+        lines = [
+            " " * indent + f"FunctionCallNode({self.name})",
+            " " * (indent + 2) + "Arguments",
+        ]
+        for argument in self.arguments:
+            lines.append(argument.pretty(indent + 4))
+        return "\n".join(lines)
+
+
+@dataclass
+class ReturnNode(ASTNode):
+    expression: ASTNode
+
+    def pretty(self, indent=0):
+        lines = [
+            " " * indent + "ReturnNode",
+            self.expression.pretty(indent + 2),
+        ]
+        return "\n".join(lines)

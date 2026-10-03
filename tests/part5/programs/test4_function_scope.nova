@@ -1,0 +1,9 @@
+let base = 5;
+
+function calculate(value) {
+    let result = value + base;
+    return result;
+}
+
+print(calculate(10));
+print(base);
