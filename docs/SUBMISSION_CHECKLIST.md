@@ -9,8 +9,9 @@
 - [x] Part 6 AI-use documentation is added while preserving the Part 4 and Part 5 history.
 - [ ] Group reviews the finalized test results and confirms which checks passed.
 - [x] Include the group-confirmed milestone contribution statement in `docs/CONTRIBUTIONS.md` and the report.
-- [ ] Create the complete project ZIP after final integration; inspect its contents and omit transient files.
-- [ ] Commit and push the final local project, then verify the GitHub link points to the intended repository and current final state.
+- [x] Create the complete project ZIP after final integration; inspect its contents and omit transient files. `submission/NovaLang_Part_6.zip` extracts to `NovaLang/`; all 64 tests and the syntax check pass in the extracted project.
+- [x] Commit and publish the final project on [codex/part6-final](https://github.com/krsnathkr/NovaLang/tree/codex/part6-final), preserving earlier files and history.
+- [ ] Group reviews and merges [draft pull request #1](https://github.com/krsnathkr/NovaLang/pull/1), and confirms the instructor can access the private repository.
 
 ## Report and demonstration
 
@@ -29,4 +30,4 @@
 - [ ] Include the verified GitHub repository link and individual contribution statements.
 - [ ] Confirm Canvas lists the intended files and recording link before the deadline.
 
-Recording, archive creation, final GitHub publication, and Canvas submission are group actions still to be completed; this checklist does not claim they have happened.
+The project ZIP and Part 6 GitHub review branch are complete and verified. The group will record the video later, as requested. Group review, pull request merge, instructor access, and Canvas submission remain group actions; this checklist does not claim they have happened.

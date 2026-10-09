@@ -65,8 +65,8 @@ From highest to lowest, expression precedence is: parentheses; unary `!` and `-`
 
 ## Project record
 
-The language and grammar began in Part 1, followed by the lexer (Part 2), parser and AST (Part 3), interpreter and control flow (Part 4), and functions, scope, and recursion (Part 5). The final report and demonstration guide describe the integrated Part 6 system. Confirm that the latest local changes are committed and pushed before submitting the GitHub link.
+The language and grammar began in Part 1, followed by the lexer (Part 2), parser and AST (Part 3), interpreter and control flow (Part 4), and functions, scope, and recursion (Part 5). The final report and demonstration guide describe the integrated Part 6 system. Part 6 is published on the review branch linked below; the earlier `main` branch is preserved until the group reviews and merges the pull request.
 
 See [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) for the cumulative account of AI assistance and [`docs/FINAL_REPORT.pdf`](docs/FINAL_REPORT.pdf) for the written report.
 
-Project repository: [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang) (private). The link identifies the existing repository; confirm the final Part 6 changes are pushed and visible on the submitted branch before turning it in.
+Project repository: [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang) (private). Final Part 6 code: [codex/part6-final](https://github.com/krsnathkr/NovaLang/tree/codex/part6-final). Review: [draft pull request #1](https://github.com/krsnathkr/NovaLang/pull/1). Confirm the instructor has repository access before submitting the link.
