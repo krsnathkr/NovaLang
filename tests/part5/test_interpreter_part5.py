@@ -60,3 +60,14 @@ def test_multiple_calls():
         "test6_multiple_calls.nova",
         "test6_multiple_calls.txt",
     )
+
+
+def load_tests(loader, tests, pattern):
+    """Keep earlier function-style checks in the standard-library suite."""
+    import unittest
+
+    return unittest.TestSuite(
+        unittest.FunctionTestCase(check)
+        for name, check in sorted(globals().items())
+        if name.startswith("test_") and callable(check)
+    )

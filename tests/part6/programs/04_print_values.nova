@@ -1,0 +1,6 @@
+let number = 7;
+print(number);
+print(3.25);
+print(true);
+print(false);
+print(number + 1);

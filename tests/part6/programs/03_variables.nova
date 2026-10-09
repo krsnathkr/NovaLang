@@ -1,0 +1,7 @@
+let balance = 100;
+let payment = 25;
+balance = balance - payment;
+payment = payment + 5;
+balance = balance - payment;
+print(balance);
+print(payment);

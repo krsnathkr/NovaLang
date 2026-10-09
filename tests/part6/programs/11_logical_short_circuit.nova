@@ -1,0 +1,6 @@
+let eligible = true;
+print(eligible && !false);
+print(false || eligible);
+print(false && missing());
+print(true || (1 / 0 > 0));
+if (eligible && 5 > 2) { print(1); } else { print(0); }

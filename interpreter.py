@@ -445,29 +445,7 @@ def run_file(path):
 
 
 if __name__ == "__main__":
-    import sys
+    # Keep the earlier entry point compatible with the integrated CLI.
+    from main import main
 
-    if len(sys.argv) != 2:
-        raise SystemExit(
-            "Usage: python3 interpreter.py <program-file>"
-        )
-
-    try:
-        run_file(sys.argv[1])
-
-    except (
-        OSError,
-        UnicodeError,
-        UndefinedVariableError,
-        DivisionByZeroError,
-        InvalidOperationError,
-        FunctionError,
-        RuntimeErrorNova,
-    ) as error:
-
-        print(
-            f"Runtime error: {error}",
-            file=sys.stderr
-        )
-
-        raise SystemExit(1) from None
+    raise SystemExit(main())

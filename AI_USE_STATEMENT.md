@@ -80,6 +80,14 @@ We also tested this environment design with recursion. We created a recursive fa
 
 This helped verify that each recursive function call received its own local environment and parameter value.
 
+## Part 6 AI Assistance
+
+For final integration, GPT-6.1 Sol supported implementation and test work, GPT-6 Luna prepared documentation, and GPT-6 Astra advised on design and review. AI assistance covered cumulative design review, the command-line entry point, regression and feature tests, the README, report, and demonstration guide. The human group members remain responsible for reviewing the code and report, recording the demonstration, and explaining their contributions.
+
+Integration exposed two concrete failures. On Python 3.9.6, evaluating a `BlockNode | None` annotation prevented module import; postponed annotation evaluation fixed it. The default recursive `unittest` discovery also missed tests in nested directories; package markers and test adapters made the cumulative checks discoverable. The implementation retained the original Part 1 `fn` spelling, accepted the later Part 5 `function` spelling, and restored general expression statements. The implementation agent then ran 64 tests, compiled the project, and compared expected and actual output for all 25 Part 6 valid/error programs. The group should review those results before submission.
+
+The earlier Part 4 and Part 5 statements above remain as the historical AI-use record for those milestones. They describe checks recorded at those times and do not by themselves establish Part 6 verification or completion.
+
 ## Testing and Verification
 
 For Part 5, we created six new test programs covering:

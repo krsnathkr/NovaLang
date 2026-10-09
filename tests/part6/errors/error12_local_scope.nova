@@ -1,0 +1,3 @@
+fn local() { let hidden = 7; }
+local();
+print(hidden);

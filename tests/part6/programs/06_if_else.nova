@@ -1,0 +1,7 @@
+let score = 75;
+if (score >= 60) { print(1); } else { print(0); }
+if (score > 90) { print(2); } else { print(3); }
+if (score < 0) { print(99); }
+if (score >= 60) {
+    if (score >= 80) { print(4); } else { print(5); }
+}
