@@ -1,139 +1,71 @@
 # NovaLang
-NovaLang is our group programming language project for CS 609. We have been developing this project step by step throughout the semester. In the previous parts, we worked on the language design, lexer, parser, AST, and interpreter. In Part 5, we extended the language by adding functions, variable scope, and recursion.
 
-## Project Progress
+NovaLang is a small interpreted language developed cumulatively for CS 609. Its pipeline is source text, lexical tokens, an abstract syntax tree, and interpreter output. It supports numeric and Boolean values, variables, arithmetic, comparisons, logical operators, conditionals, loops, functions, lexical parent scopes, and recursion.
 
-- Part 1: Language design and grammar
-- Part 2: Lexer
-- Part 3: Parser and AST
-- Part 4: Interpreter and environment/symbol table
-- Part 5: Functions, scope, and recursion
+## Run a program
 
-## Part 4
+```sh
+python3 main.py tests/part5/programs/test5_recursion.nova
+```
 
-For Part 4, we added the interpreter and environment to our previous project. The interpreter reads the AST created by the parser and executes the program.
+Inspect the lexer or parser without executing the program:
 
-The following features are supported:
+```sh
+python3 main.py --tokens tests/programs/functions.nova
+python3 main.py --ast tests/part6/programs/02_precedence.nova
+```
 
-- Variable declaration
-- Variable assignment
-- Addition, subtraction, multiplication, and division
-- Modulo operation
-- Operator precedence
-- Parentheses
-- Comparison operators
-- Boolean values
-- Logical operators
-- If/else statements
-- While loops
-- Print statements
-- Runtime error handling
+`--tokens` prints token type, value, and source position. `--ast` prints the parsed tree. These options are mutually exclusive. With no inspection option, the interpreter executes the source file. User-facing errors include lexical, parse, and runtime failures with source location where available.
 
-The comparison operators supported are:
+## Test
 
-`==`, `!=`, `<`, `>`, `<=`, `>=`
+NovaLang uses Python 3.9 or newer and only the Python standard library; there is no dependency installation step.
 
-The logical operators supported are:
+Run the complete standard-library test suite from the project root:
 
-`&&`, `||`, `!`
+```sh
+python3 -m unittest discover -s tests
+```
 
-## Part 5
+Check Python syntax with:
 
-For Part 5, we extended the interpreter to support functions and variable scope. Functions can have parameters, local variables, function calls, and return values.
+```sh
+python3 -m compileall -q .
+```
 
-Example:
+The tests retain the cumulative Part 2–5 checks and expected/actual output. Part 6 includes 12 valid programs covering arithmetic and precedence, variables, printing, comparisons, conditionals, loops, functions, scope, recursion, logical short-circuiting, and an integrated example. Thirteen separate examples exercise lexical, syntax, and runtime failures. On Python 3.9.6, all 64 tests passed, and actual output matched expected output for all 25 Part 6 fixtures. See [`tests/part6/RESULTS.md`](tests/part6/RESULTS.md) for the verification results.
 
-function add(a, b) {
-    return a + b;
-}
-let result = add(10, 20);
-print(result);
+## Language notes
 
+Statements end in semicolons; blocks use braces. Variables are declared with `let`. Functions use the original `fn` spelling. The lexer also accepts `function` for compatibility with later examples:
 
-The output is:
-30
-
-### Variable Scope
-NovaLang uses environments to represent variable scope. Each function call creates its own local environment. The function environment has a parent environment, which allows a function to access variables from an outer scope when needed.
-Local variables are stored in the function's local environment, so they do not replace variables with the same name in the global environment.
-
-For example:
-let x = 10;
-function test() {
-    let x = 20;
-    print(x);
-}
-test();
-print(x);
-
-The output is:
-20
-10
-
-This shows that the `x` inside the function is local while the global `x` remains unchanged.
-
-### Extension Feature: Recursion
-
-For our Part 5 extension feature, we implemented recursion. A function can call itself while it is executing.
-
-For example:
-function factorial(n) {
+```text
+fn factorial(n) {
     if (n <= 1) {
         return 1;
     }
-
     return n * factorial(n - 1);
 }
 
 print(factorial(5));
+```
 
-The output is:
+The result is `120`. Each call gets a fresh local environment whose parent is the function's defining environment. Local declarations can shadow outer variables. Conditions require Boolean values. Logical `&&` and `||` short-circuit. Arithmetic supports `+`, `-`, `*`, `/`, and `%`; comparisons return Booleans.
 
-120
+From highest to lowest, expression precedence is: parentheses; unary `!` and `-`; `*`, `/`, `%`; `+`, `-`; relational comparisons; equality; `&&`; `||`. Operators at the same binary level associate left to right. Thus `2 + 3 * 4` parses as addition whose right child is multiplication, and evaluates to `14`.
 
-Each recursive function call creates a new local environment. This keeps the parameter values from different calls separate.
+## Project map
 
-## Part 5 Testing
+- `lexer.py`, `parser.py`, `ast_nodes.py`: tokenization, recursive-descent parsing, and tree nodes.
+- `interpreter.py`, `environment.py`: evaluation, function calls, errors, and variable storage.
+- `main.py`: command-line entry point.
+- `grammar.ebnf`: grammar used by the implementation.
+- `tests/`: programs, automated tests, and output examples.
 
-We created six new programs for Part 5:
+## Project record
 
-1. Basic function definition and call
-2. Function parameters and local variables
-3. Local and global variable scope
-4. Function access to an outer variable
-5. Recursive factorial function
-6. Multiple calls to the same function
+The language and grammar began in Part 1, followed by the lexer (Part 2), parser and AST (Part 3), interpreter and control flow (Part 4), and functions, scope, and recursion (Part 5). The separately submitted final report describes the integrated Part 6 system. The integrated system is published in this repository, and the earlier milestones remain in its commit history.
 
-The Part 5 tests can be run with:
+The separately submitted report PDF includes the individual contribution statement and AI-use documentation. The local `docs/` folder is excluded from Git so the report and recording materials can be submitted separately.
 
-       python3 -m pytest tests/part5/ -v
-
-Part 4 and Part 5 can be tested together with:
-
-       python3 -m pytest tests/part4/ tests/part5/ -v
-
-At the time of our Part 5 testing, all 10 Part 4 and Part 5 automated tests passed.
-
-## Running a NovaLang Program
-
-A NovaLang program can be executed with:
-
-      python3 interpreter.py path/to/program.nova
-
-For example:
-    python3 interpreter.py tests/part5/programs/test5_recursion.nova
-
-## Project Files
-
-The main files used in the project are:
-
-- `lexer.py`
-- `parser.py`
-- `ast_nodes.py`
-- `environment.py`
-- `interpreter.py`
-- `grammar.ebnf`
-- `README.md`
-- `AI_USE_STATEMENT.md`
-- `tests/part4/`
-- `tests/part5/`
+Project repository: [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang) (private). Final system: [main](https://github.com/krsnathkr/NovaLang/tree/main). Part 6 integration: [pull request #1](https://github.com/krsnathkr/NovaLang/pull/1).

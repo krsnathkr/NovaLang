@@ -1,0 +1,97 @@
+unittest.case.FunctionTestCase (test_all) ... ok
+unittest.case.FunctionTestCase (test_comparison) ... ok
+unittest.case.FunctionTestCase (test_if_else) ... ok
+unittest.case.FunctionTestCase (test_while) ... ok
+unittest.case.FunctionTestCase (test_basic_function) ... ok
+unittest.case.FunctionTestCase (test_function_scope) ... ok
+unittest.case.FunctionTestCase (test_multiple_calls) ... ok
+unittest.case.FunctionTestCase (test_parameters) ... ok
+unittest.case.FunctionTestCase (test_recursion) ... ok
+unittest.case.FunctionTestCase (test_scope) ... ok
+test_01_arithmetic (part6.test_final_system.FinalProgramTests) ... ok
+test_02_precedence (part6.test_final_system.FinalProgramTests) ... ok
+test_03_variables (part6.test_final_system.FinalProgramTests) ... ok
+test_04_print_values (part6.test_final_system.FinalProgramTests) ... ok
+test_05_comparisons (part6.test_final_system.FinalProgramTests) ... ok
+test_06_if_else (part6.test_final_system.FinalProgramTests) ... ok
+test_07_while_sum (part6.test_final_system.FinalProgramTests) ... ok
+test_08_functions (part6.test_final_system.FinalProgramTests) ... ok
+test_09_scope (part6.test_final_system.FinalProgramTests) ... ok
+test_10_recursion (part6.test_final_system.FinalProgramTests) ... ok
+test_11_logical_short_circuit (part6.test_final_system.FinalProgramTests) ... ok
+test_12_integrated (part6.test_final_system.FinalProgramTests) ... ok
+test_error01_lexical (part6.test_final_system.FinalProgramTests) ... ok
+test_error02_syntax (part6.test_final_system.FinalProgramTests) ... ok
+test_error03_undefined_variable (part6.test_final_system.FinalProgramTests) ... ok
+test_error04_division_zero (part6.test_final_system.FinalProgramTests) ... ok
+test_error05_modulo_zero (part6.test_final_system.FinalProgramTests) ... ok
+test_error06_invalid_operand (part6.test_final_system.FinalProgramTests) ... ok
+test_error07_invalid_condition (part6.test_final_system.FinalProgramTests) ... ok
+test_error08_undefined_function (part6.test_final_system.FinalProgramTests) ... ok
+test_error09_argument_count (part6.test_final_system.FinalProgramTests) ... ok
+test_error10_return_outside_function (part6.test_final_system.FinalProgramTests) ... ok
+test_error11_duplicate_parameter (part6.test_final_system.FinalProgramTests) ... ok
+test_error12_local_scope (part6.test_final_system.FinalProgramTests) ... ok
+test_error13_recursion_limit (part6.test_final_system.FinalProgramTests) ... ok
+test_ast_preserves_precedence (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_block_locals_do_not_leak (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_both_function_spellings (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_end_of_input_syntax_error_has_nearest_location (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_expression_statements_from_original_grammar (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_fresh_function_locals (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_function_uses_lexical_scope (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_inspection_modes_are_mutually_exclusive (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_legacy_interpreter_cli_handles_all_error_stages (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_missing_file_is_readable_error (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_part4_expected_outputs_remain_compatible (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_return_exits_nested_control_flow (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_runtime_failure_restores_environment_and_function_depth (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_token_inspection_does_not_execute (part6.test_final_system.IntegrationRegressionTests) ... ok
+test_invalid_statements (test_errors.ParserErrorTests) ... ok
+test_arithmetic_expression (test_lexer.LexerTests) ... ok
+test_control_structures_comparisons_and_booleans (test_lexer.LexerTests) ... ok
+test_function_definition_and_call (test_lexer.LexerTests) ... ok
+test_invalid_input (test_lexer.LexerTests) ... ok
+test_print_statement (test_lexer.LexerTests) ... ok
+test_variable_declaration (test_lexer.LexerTests) ... ok
+unittest.case.FunctionTestCase (test_assignment) ... ok
+unittest.case.FunctionTestCase (test_multiple_statements) ... ok
+unittest.case.FunctionTestCase (test_number_expression) ... ok
+unittest.case.FunctionTestCase (test_operator_precedence) ... ok
+unittest.case.FunctionTestCase (test_parentheses) ... ok
+unittest.case.FunctionTestCase (test_print_statement) ... ok
+unittest.case.FunctionTestCase (test_unary_minus) ... ok
+unittest.case.FunctionTestCase (test_variable_declaration) ... ok
+
+----------------------------------------------------------------------
+Ran 64 tests in 1.143s
+
+OK
+
+Legacy checks console output:
+PASS: arithmetic and precedence
+PASS: variables and assignment
+PASS: if true branch
+PASS: if false / else branch
+PASS: while loop
+PASS: undefined variable error
+PASS: division by zero error
+PASS: invalid operation error
+30
+15
+5
+4
+9
+16
+42
+120
+20
+10
+PASS: Assignment
+PASS: Multiple statements
+PASS: Number expression
+PASS: Operator precedence
+PASS: Parentheses
+PASS: Print statement
+PASS: Unary minus
+PASS: Variable declaration

@@ -60,7 +60,7 @@ class Parser:
         if self.check(token_type):
             return self.advance()
 
-        token = self.peek()
+        token = self.peek() or (self.tokens[-1] if self.tokens else None)
 
         if message is None:
             message = f"Expected {token_type}"
@@ -75,7 +75,8 @@ class Parser:
         token = self.peek()
 
         if token is None:
-            raise ParseError("Expected expression")
+            raise ParseError("Expected expression before end of input",
+                             self.tokens[-1] if self.tokens else None)
 
         if self.check("NUMBER"):
             return NumberNode(self.advance().lexeme)
@@ -238,33 +239,19 @@ class Parser:
         if self.match("WHILE"):
             return self.parse_while_statement()
 
-        if self.match("FUNCTION"):
+        if self.match("FN", "FUNCTION"):
             return self.parse_function_definition()
 
         if self.match("RETURN"):
             return self.parse_return_statement()
 
-        if self.check("ID"):
-            next_token = self.peek_next()
+        next_token = self.peek_next()
+        if self.check("ID") and next_token is not None and next_token.type == "ASSIGN":
+            return self.parse_assignment()
 
-            # Assignment
-            if next_token is not None and next_token.type == "ASSIGN":
-                return self.parse_assignment()
-
-            # Function call used as a statement
-            expression = self.parse_expression()
-            self.expect("SEMICOLON", "Expected ';' after function call")
-            return expression
-
-        token = self.peek()
-
-        if token is None:
-            raise ParseError("Expected statement")
-
-        raise ParseError(
-            f"Unexpected token '{token.lexeme}'",
-            token
-        )
+        expression = self.parse_expression()
+        self.expect("SEMICOLON", "Expected ';' after expression")
+        return expression
 
     def parse_variable_declaration(self):
         name = self.expect(
@@ -348,7 +335,8 @@ class Parser:
         while not self.check("RBRACE"):
             if self.peek() is None:
                 raise ParseError(
-                    "Expected '}' before end of input"
+                    "Expected '}' before end of input",
+                    self.tokens[-1] if self.tokens else None
                 )
 
             statements.append(
@@ -415,7 +403,7 @@ class Parser:
     def parse_function_definition(self):
         name = self.expect(
             "ID",
-            "Expected function name after 'function'"
+            "Expected function name after 'fn' or 'function'"
         )
 
         self.expect(
@@ -439,6 +427,10 @@ class Parser:
                     "Expected parameter name after ','"
                 )
 
+                if parameter.lexeme in parameters:
+                    raise ParseError(
+                        f"Duplicate parameter '{parameter.lexeme}'", parameter
+                    )
                 parameters.append(parameter.lexeme)
 
         self.expect(

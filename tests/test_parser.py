@@ -151,6 +151,18 @@ def test_unary_minus():
 
     print("PASS: Unary minus")
 
+
+
+def load_tests(loader, tests, pattern):
+    """Keep earlier function-style checks in the standard-library suite."""
+    import unittest
+
+    return unittest.TestSuite(
+        unittest.FunctionTestCase(check)
+        for name, check in sorted(globals().items())
+        if name.startswith("test_") and callable(check)
+    )
+
 if __name__ == "__main__":
     test_number_expression()
     test_operator_precedence()

@@ -1,0 +1,17 @@
+fn factorial(n) {
+    if (n <= 1) { return 1; }
+    return n * factorial(n - 1);
+}
+fn report(limit) {
+    let i = 1;
+    let sum = 0;
+    while (i <= limit) {
+        if (i % 2 == 0 && i > 0) { sum = sum + factorial(i); }
+        else { sum = sum + i; }
+        i = i + 1;
+    }
+    return sum;
+}
+let limit = 4;
+print(report(limit));
+print(limit);

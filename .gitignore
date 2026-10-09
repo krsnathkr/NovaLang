@@ -3,3 +3,4 @@ __pycache__/
 .DS_Store
 *.zip
 NovaLang_Part_2/
+/docs/

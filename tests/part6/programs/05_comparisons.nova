@@ -1,0 +1,10 @@
+let a = 5;
+let b = 8;
+print(a == 5);
+print(a != b);
+print(a < b);
+print(b > a);
+print(a <= 5);
+print(b >= 8);
+print(a == b);
+print(true != false);

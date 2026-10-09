@@ -8,7 +8,7 @@
     | <while-statement>
     | <function-definition>
     | <return-statement>
-    | <function-call-statement>
+    | <expression-statement>
     ;
 
 <variable-declaration> ::= "let" <identifier> "=" <expression> ";" ;
@@ -25,7 +25,7 @@
     "while" "(" <expression> ")" <block> ;
 
 <function-definition> ::=
-    "function" <identifier> "(" [ <parameter-list> ] ")" <block> ;
+    ("fn" | "function") <identifier> "(" [ <parameter-list> ] ")" <block> ;
 
 <parameter-list> ::=
     <identifier> { "," <identifier> } ;
@@ -33,8 +33,8 @@
 <return-statement> ::=
     "return" <expression> ";" ;
 
-<function-call-statement> ::=
-    <function-call> ";" ;
+<expression-statement> ::=
+    <expression> ";" ;
 
 <function-call> ::=
     <identifier> "(" [ <argument-list> ] ")" ;
@@ -69,9 +69,9 @@
 
 <boolean> ::= "true" | "false" ;
 
-<identifier> ::= letter { letter | digit | "_" } ;
+<identifier> ::= <letter> { <letter> | <digit> | "_" } ;
 
-<number> ::= digit { digit } [ "." digit { digit } ] ;
+<number> ::= <digit> { <digit> } [ "." <digit> { <digit> } ] ;
 
 <letter> ::= "A" | "B" | ... | "Z"
            | "a" | "b" | ... | "z"
@@ -79,3 +79,6 @@
 
 <digit> ::= "0" | "1" | "2" | "3" | "4"
           | "5" | "6" | "7" | "8" | "9" ;
+
+(* Semantic constraints: parameter names within a function must be unique.
+   return is valid only during a function call. Blocks create child scopes. *)
