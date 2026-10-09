@@ -33,7 +33,7 @@ Check Python syntax with:
 python3 -m compileall -q .
 ```
 
-The repository also includes the earlier Part 4 and Part 5 pytest commands and captured expected/actual output under `tests/`. Part 6 includes 12 valid programs covering arithmetic and precedence, variables, printing, comparisons, conditionals, loops, functions, scope, recursion, logical short-circuiting, and an integrated example. Thirteen separate examples exercise lexical, syntax, and runtime failures. On Python 3.9.6, the implementation agent reported 64 passing tests and exact expected/actual matches for all 25 Part 6 fixtures. See [`tests/part6/RESULTS.md`](tests/part6/RESULTS.md); the group should review the evidence before submission.
+The tests retain the cumulative Part 2–5 checks and expected/actual output. Part 6 includes 12 valid programs covering arithmetic and precedence, variables, printing, comparisons, conditionals, loops, functions, scope, recursion, logical short-circuiting, and an integrated example. Thirteen separate examples exercise lexical, syntax, and runtime failures. On Python 3.9.6, all 64 tests passed, and actual output matched expected output for all 25 Part 6 fixtures. See [`tests/part6/RESULTS.md`](tests/part6/RESULTS.md) for the verification results.
 
 ## Language notes
 
@@ -61,12 +61,11 @@ From highest to lowest, expression precedence is: parentheses; unary `!` and `-`
 - `main.py`: command-line entry point.
 - `grammar.ebnf`: grammar used by the implementation.
 - `tests/`: programs, automated tests, and output examples.
-- `docs/`: final report, demonstration guide, contribution statement, and submission checklist.
 
 ## Project record
 
-The language and grammar began in Part 1, followed by the lexer (Part 2), parser and AST (Part 3), interpreter and control flow (Part 4), and functions, scope, and recursion (Part 5). The final report and demonstration guide describe the integrated Part 6 system. Part 6 is published on the review branch linked below; the earlier `main` branch is preserved until the group reviews and merges the pull request.
+The language and grammar began in Part 1, followed by the lexer (Part 2), parser and AST (Part 3), interpreter and control flow (Part 4), and functions, scope, and recursion (Part 5). The separately submitted final report describes the integrated Part 6 system. The integrated system is published in this repository, and the earlier milestones remain in its commit history.
 
-See [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) for the cumulative account of AI assistance and [`docs/FINAL_REPORT.pdf`](docs/FINAL_REPORT.pdf) for the written report.
+The separately submitted report PDF includes the individual contribution statement and AI-use documentation. The local `docs/` folder is excluded from Git so the report and recording materials can be submitted separately.
 
-Project repository: [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang) (private). Final Part 6 code: [codex/part6-final](https://github.com/krsnathkr/NovaLang/tree/codex/part6-final). Review: [draft pull request #1](https://github.com/krsnathkr/NovaLang/pull/1). Confirm the instructor has repository access before submitting the link.
+Project repository: [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang) (private). Final system: [main](https://github.com/krsnathkr/NovaLang/tree/main). Part 6 integration: [pull request #1](https://github.com/krsnathkr/NovaLang/pull/1).
