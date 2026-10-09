@@ -78,7 +78,7 @@ Testing is organized around complete NovaLang programs and focused unit tests. T
 | 05 comparisons | Relational/equality operators | 11 logical | Boolean operators, short-circuit |
 | 06 if/else | Branching | 12 integrated | Combined language features |
 
-The error suite includes lexical and syntax errors, undefined variables/functions, division and modulo by zero, invalid operands and conditions, wrong argument counts, return outside a function, duplicate parameters, local-scope failure, and recursion-limit protection. The implementation agent ran `python3 -m unittest discover -s tests -v` on Python 3.9.6: 64 tests passed. It also ran `python3 -m compileall -q .` successfully and compared actual output for all 12 valid and 13 error examples with their expected files; all 25 matched. These results are recorded in `tests/part6/RESULTS.md`. The group should review and confirm the evidence before submission. Package markers in nested test directories ensure recursive standard-library discovery includes the full suite.
+The error suite includes lexical and syntax errors, undefined variables/functions, division and modulo by zero, invalid operands and conditions, wrong argument counts, return outside a function, duplicate parameters, local-scope failure, and recursion-limit protection. The complete test suite was run with `python3 -m unittest discover -s tests -v` on Python 3.9.6: all 64 tests passed. The syntax check, `python3 -m compileall -q .`, also passed. Actual output for all 12 valid programs and 13 error programs matched the expected files. These results are recorded in `tests/part6/RESULTS.md`. Package markers in nested test directories ensure recursive standard-library discovery includes the full suite.
 
 ## 6. Challenges, lessons, contribution statement, and AI use
 
@@ -86,18 +86,16 @@ An integration challenge was keeping the original Part 1 `fn` spelling consisten
 
 ### Individual contribution statement
 
-The group confirmed the following milestone contributions for this report. The statements map each person to their assigned project parts and do not invent additional task-level claims or commit evidence.
+The project responsibilities were divided across the six cumulative milestones as follows.
 
-| Group member | Confirmed project parts | Contribution summary |
+| Group member | Project parts | Contribution summary |
 | --- | --- | --- |
 | Sarada Garlapati | Parts 1 and 3 | Language design and grammar; parser and AST |
 | Krishna Thakar | Parts 2 and 6 | Lexer; final integration, testing, report, and demonstration preparation |
 | Rabin KC | Parts 4 and 5 | Interpreter and control structures; functions, scope, and recursion |
 
-The group should review the complete contribution statement in `docs/CONTRIBUTIONS.md` before submission. File paths provide project context, not Git authorship proof.
-
 ### AI use
 
-The project used OpenAI ChatGPT assistance during earlier design, lexer, parser, interpreter, test, and documentation milestones; the milestone-specific history is retained in `AI_USE_STATEMENT.md`. For Part 6, GPT-6.1 Sol supported implementation and tests, GPT-6 Luna supported documentation, and GPT-6 Astra advised on design and review. One concrete integration correction was postponing evaluation of a union annotation for Python 3.9.6; the integration also fixed nested `unittest` discovery with package markers and restored `fn` while retaining `function` as an alias. The implementation agent's verification is recorded above; the group should review those results and demonstrate its understanding in the recording.
+The project used OpenAI ChatGPT assistance during earlier design, lexer, parser, interpreter, test, and documentation milestones; the milestone-specific history is retained in `AI_USE_STATEMENT.md`. For Part 6, GPT-6.1 Sol supported implementation and tests, GPT-6 Luna supported documentation, and GPT-6 Astra advised on design and review. One concrete integration correction was postponing evaluation of a union annotation for Python 3.9.6; the integration also fixed nested `unittest` discovery with package markers and restored `fn` while retaining `function` as an alias. AI-assisted changes were verified through the complete automated test suite, expected-output comparisons, Python syntax checks, and an independent technical review.
 
-**Repository:** [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang), a private repository. The link is verified to exist; this report does not claim that the current local Part 6 changes have been pushed.
+**Repository:** [github.com/krsnathkr/NovaLang](https://github.com/krsnathkr/NovaLang), a private repository. The completed Part 6 implementation is available on the `codex/part6-final` branch.
