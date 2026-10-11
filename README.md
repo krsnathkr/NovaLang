@@ -33,7 +33,7 @@ Check Python syntax with:
 python3 -m compileall -q .
 ```
 
-The tests retain the cumulative Part 2–5 checks and expected/actual output. Part 6 includes 12 valid programs covering arithmetic and precedence, variables, printing, comparisons, conditionals, loops, functions, scope, recursion, logical short-circuiting, and an integrated example. Thirteen separate examples exercise lexical, syntax, and runtime failures. On Python 3.9.6, all 64 tests passed, and actual output matched expected output for all 25 Part 6 fixtures. See [`tests/part6/RESULTS.md`](tests/part6/RESULTS.md) for the verification results.
+The tests retain the cumulative Parts 2–5 checks and expected/actual output. Part 6 includes 12 valid programs and 13 separate lexical, syntax, and runtime failure examples. The October 11 audit results across Python versions, including numerical edge cases, are recorded in [`tests/part6/RESULTS.md`](tests/part6/RESULTS.md).
 
 ## Language notes
 
@@ -50,13 +50,14 @@ fn factorial(n) {
 print(factorial(5));
 ```
 
-The result is `120`. Each call gets a fresh local environment whose parent is the function's defining environment. Local declarations can shadow outer variables. Conditions require Boolean values. Logical `&&` and `||` short-circuit. Arithmetic supports `+`, `-`, `*`, `/`, and `%`; comparisons return Booleans.
+The result is `120`. Each call gets a fresh local environment whose parent is the function's defining environment. Local declarations can shadow outer variables. Conditions require Boolean values. Logical `&&` and `||` short-circuit. Arithmetic supports `+`, `-`, `*`, `/`, and `%`; comparisons return Booleans. Decimal values use floating-point arithmetic, and division returns a float: a whole-number quotient can print as `2.0`. Non-finite numeric results and values that exceed the host's decimal conversion limit produce readable NovaLang runtime errors; exact behavior for very large integer input/output can depend on the Python version's configured digit limit.
 
 From highest to lowest, expression precedence is: parentheses; unary `!` and `-`; `*`, `/`, `%`; `+`, `-`; relational comparisons; equality; `&&`; `||`. Operators at the same binary level associate left to right. Thus `2 + 3 * 4` parses as addition whose right child is multiplication, and evaluates to `14`.
 
 ## Project map
 
 - `lexer.py`, `parser.py`, `ast_nodes.py`: tokenization, recursive-descent parsing, and tree nodes.
+- [`TOKEN_DEFINITIONS.md`](TOKEN_DEFINITIONS.md): token names and the lexemes or patterns that produce them.
 - `interpreter.py`, `environment.py`: evaluation, function calls, errors, and variable storage.
 - `main.py`: command-line entry point.
 - `grammar.ebnf`: grammar used by the implementation.

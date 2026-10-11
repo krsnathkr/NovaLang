@@ -84,7 +84,7 @@ This helped verify that each recursive function call received its own local envi
 
 For final integration, GPT-6.1 Sol supported implementation and test work, GPT-6 Luna prepared documentation, and GPT-6 Astra advised on design and review. AI assistance covered cumulative design review, the command-line entry point, regression and feature tests, the README, report, and demonstration guide. The human group members remain responsible for reviewing the code and report, recording the demonstration, and explaining their contributions.
 
-Integration exposed two concrete failures. On Python 3.9.6, evaluating a `BlockNode | None` annotation prevented module import; postponed annotation evaluation fixed it. The default recursive `unittest` discovery also missed tests in nested directories; package markers and test adapters made the cumulative checks discoverable. The implementation retained the original Part 1 `fn` spelling, accepted the later Part 5 `function` spelling, and restored general expression statements. The implementation agent then ran 64 tests, compiled the project, and compared expected and actual output for all 25 Part 6 valid/error programs. The group should review those results before submission.
+Integration exposed two concrete failures. On Python 3.9.6, evaluating a `BlockNode | None` annotation prevented module import; postponed annotation evaluation fixed it. The default recursive `unittest` discovery also missed tests in nested directories; package markers and test adapters made the cumulative checks discoverable. The implementation retained the original Part 1 `fn` spelling, accepted the later Part 5 `function` spelling, and restored general expression statements. The October 8 verification record reported 64 tests and expected/actual comparison for all 25 Part 6 fixtures. The October 11 audit supersedes that count; current version-specific results are recorded below and in `tests/part6/RESULTS.md`.
 
 The earlier Part 4 and Part 5 statements above remain as the historical AI-use record for those milestones. They describe checks recorded at those times and do not by themselves establish Part 6 verification or completion.
 
@@ -104,3 +104,12 @@ For Part 5, we created six new test programs covering:
 We ran the Part 5 automated tests and all 6 tests passed.
 
 We also ran the Part 4 and Part 5 tests together. All 10 tests passed, confirming that the Part 5 changes did not break the Part 4 functionality.
+
+## October 11 Audit Verification
+
+GPT-6.1 Sol reviewed the language pipeline, reproduced numerical edge failures, added regression tests, and independently reviewed the fixes. GPT-6 Luna checked coding deliverables and updated documentation. The orchestrator read the six Canvas assignments, checked the original design, and ran the final suite and output comparisons. The audit corrected raw Python numeric exceptions and rejected non-finite decimal values while preserving valid integer arithmetic.
+
+The final audit ran the 67-test suite on Python 3.9.6 and Python 3.11.14. Python 3.11.14 passed all 67 tests. Python 3.9.6 passed 66 tests and skipped one host-specific integer digit-limit check. On Python 3.13, all 42 Part 6 tests passed. The audit also confirmed the Part 2–6 coding requirements and added `TOKEN_DEFINITIONS.md` after the Part 2 feedback identified the missing token definitions. Numerical edge behavior and exact test scope are recorded in `tests/part6/RESULTS.md`.
+
+The Canvas coding assignment sources are [Part 1](https://canvas.semo.edu/courses/48106/assignments/816773), [Part 2](https://canvas.semo.edu/courses/48106/assignments/816775), [Part 3](https://canvas.semo.edu/courses/48106/assignments/816777), [Part 4](https://canvas.semo.edu/courses/48106/assignments/816778), [Part 5](https://canvas.semo.edu/courses/48106/assignments/816801), and [Part 6](https://canvas.semo.edu/courses/48106/assignments/816804).
+

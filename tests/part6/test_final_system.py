@@ -5,10 +5,11 @@ import io
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 
 from environment import UndefinedVariableError
-from interpreter import FunctionError, Interpreter, run_source
+from interpreter import FunctionError, Interpreter, RuntimeErrorNova, run_source
 from lexer import tokenize
 from parser import ParseError, Parser
 
@@ -18,7 +19,7 @@ HERE = Path(__file__).resolve().parent
 
 def cli(program_file, *options, entry="main.py"):
     return subprocess.run(
-        [sys.executable, str(ROOT / entry), str(program_file), *options],
+        [sys.executable, "-B", str(ROOT / entry), str(program_file), *options],
         capture_output=True, text=True, cwd=ROOT, check=False,
     )
 
@@ -170,6 +171,57 @@ class IntegrationRegressionTests(unittest.TestCase):
         self.assertEqual(machine.function_depth, 0)
         with self.assertRaises(FunctionError):
             machine.execute(Parser(tokenize("return 1;")).parse_program())
+
+    def test_numeric_overflow_is_a_language_runtime_error(self):
+        large = "9" * 400
+        finite_decimal = "9" * 200 + ".0"
+        for expression in (
+            f"{large} / 1", f"{large} + 0.5", f"{large}.0",
+            f"{finite_decimal} * {finite_decimal}",
+        ):
+            with self.subTest(expression=expression[-8:]):
+                with self.assertRaisesRegex(RuntimeErrorNova, "Numeric value is too large"):
+                    self.capture(f"print({expression});")
+
+        machine = Interpreter()
+        root_environment = machine.environment
+        program = Parser(tokenize(
+            f"fn bad() {{ if (true) {{ return {large} / 1; }} }} bad();"
+        )).parse_program()
+        with self.assertRaises(RuntimeErrorNova):
+            machine.execute(program)
+        self.assertIs(machine.environment, root_environment)
+        self.assertEqual(machine.function_depth, 0)
+
+    def test_integer_print_limit_is_a_language_runtime_error(self):
+        get_limit = getattr(sys, "get_int_max_str_digits", None)
+        if get_limit is None or get_limit() == 0:
+            self.skipTest("This Python has no active integer-to-string digit limit")
+        literal = "9" * (get_limit() // 2 + 1)
+        source = f"let n = {literal}; print(n * n);"
+        with self.assertRaisesRegex(RuntimeErrorNova, "Numeric value is too large to print"):
+            self.capture(source)
+        with tempfile.TemporaryDirectory() as directory:
+            program = Path(directory) / "large_output.nova"
+            program.write_text(source, encoding="utf-8")
+            result = cli(program)
+            self.assertEqual(result.returncode, 1)
+            self.assertEqual(result.stdout, "")
+            self.assertEqual(result.stderr, "Runtime error: Numeric value is too large to print\n")
+
+    def test_cli_numeric_overflow_has_no_python_traceback(self):
+        with tempfile.TemporaryDirectory() as directory:
+            program = Path(directory) / "overflow.nova"
+            program.write_text("print(" + "9" * 400 + " / 1);", encoding="utf-8")
+            for entry in ("main.py", "interpreter.py"):
+                with self.subTest(entry=entry):
+                    result = cli(program, entry=entry)
+                    self.assertEqual(result.returncode, 1)
+                    self.assertEqual(result.stdout, "")
+                    self.assertEqual(
+                        result.stderr,
+                        "Runtime error: Numeric value is too large for this operation\n",
+                    )
 
     def test_end_of_input_syntax_error_has_nearest_location(self):
         for source in ("print(1)", "if (true) {", "let x ="):

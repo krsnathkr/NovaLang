@@ -1,3 +1,5 @@
+import math
+
 from ast_nodes import (
     ProgramNode,
     NumberNode,
@@ -87,7 +89,12 @@ class Interpreter:
         self.function_depth = 0
 
     def execute(self, program):
-        self.visit(program)
+        try:
+            self.visit(program)
+        except OverflowError:
+            raise RuntimeErrorNova(
+                "Numeric value is too large for this operation"
+            ) from None
         return self.output
 
     def visit(self, node):
@@ -107,11 +114,12 @@ class Interpreter:
 
     def visit_NumberNode(self, node):
         try:
-            return float(node.value) if "." in node.value else int(node.value)
+            value = float(node.value) if "." in node.value else int(node.value)
         except ValueError:
             raise RuntimeErrorNova(
                 f"Invalid numeric literal '{node.value}'"
             ) from None
+        return self.check_numeric_range(value)
 
     def visit_BooleanNode(self, node):
         return node.value
@@ -324,19 +332,16 @@ class Interpreter:
                 )
 
             if op == "+":
-                return left + right
-
-            if op == "-":
-                return left - right
-
-            if op == "*":
-                return left * right
-
-            if op == "/":
-                return left / right
-
-            if op == "%":
-                return left % right
+                result = left + right
+            elif op == "-":
+                result = left - right
+            elif op == "*":
+                result = left * right
+            elif op == "/":
+                result = left / right
+            else:
+                result = left % right
+            return self.check_numeric_range(result)
 
         if op in {"<", ">", "<=", ">="}:
             self.require_number(
@@ -386,6 +391,12 @@ class Interpreter:
     # ---------------------------------------------------------
 
     @staticmethod
+    def check_numeric_range(value):
+        if isinstance(value, float) and not math.isfinite(value):
+            raise RuntimeErrorNova("Numeric value is too large for this operation")
+        return value
+
+    @staticmethod
     def is_number(value):
         return (
             isinstance(value, (int, float))
@@ -421,7 +432,10 @@ class Interpreter:
         if isinstance(value, bool):
             return "true" if value else "false"
 
-        return str(value)
+        try:
+            return str(value)
+        except ValueError:
+            raise RuntimeErrorNova("Numeric value is too large to print") from None
 
 
 def run_source(source):
